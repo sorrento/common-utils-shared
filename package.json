@@ -1,0 +1,17 @@
+{
+  "name": "common-utils-shared",
+  "version": "1.0.0",
+  "description": "Librería compartida de utilidades puras y formateadores (Front & Back)",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "utils",
+    "formatters",
+    "helpers",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC"
+}
