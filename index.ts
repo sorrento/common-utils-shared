@@ -4,3 +4,5 @@
 
 export * from './src/formatters';
 export * from './src/ai';
+export * from './src/emailTemplates';
+
