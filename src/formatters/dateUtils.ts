@@ -21,12 +21,26 @@ export function formatCurrency(amount: number, currency: string = 'EUR', locale:
 }
 
 /**
+ * Returns current timestamp formatted as YYYY-MM-DD HH:mm in local time (Madrid/user timezone)
+ */
+export function getNowFormatted(d: Date = new Date()): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
+/**
  * Formats a date string to include 2-digit day, short month, 4-digit YEAR, and time (e.g. "26 Jun 2026 08:00").
  */
 export function fmtDateWithYear(dateStr?: string, includeTime: boolean = true): string {
   if (!dateStr) return '—';
   try {
-    const formatted = dateStr.includes('T') ? dateStr : dateStr.replace(' ', 'T');
+    const trimmed = dateStr.trim();
+    // If it's in format YYYY-MM-DD HH:mm or similar without T/Z, parse components directly or preserve local time
+    const formatted = trimmed.includes('T') ? trimmed : trimmed.replace(' ', 'T');
     const d = new Date(formatted);
     if (isNaN(d.getTime())) return dateStr;
 
@@ -40,7 +54,8 @@ export function fmtDateWithYear(dateStr?: string, includeTime: boolean = true): 
 
     const timeStr = d.toLocaleTimeString('en-GB', {
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
+      hour12: false
     });
 
     return `${dayMonthYear} ${timeStr}`;
